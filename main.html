@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nitai Solutions - Professional Business Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Professional Color Scheme - White Background */
+            --primary-teal: #14b8a6;
+            --secondary-brown: #8b5a3c;
+            --bg-white: #ffffff;
+            --bg-light-grey: #f8fafc;
+            --bg-soft-grey: #f1f5f9;
+            --accent-aqua: #67e8f9;
+            --text-dark: #1e293b;
+            --text-medium: #475569;
+            --text-light: #64748b;
+            
+            /* Gradients */
+            --primary-gradient: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+            --accent-gradient: linear-gradient(135deg, #67e8f9 0%, #22d3ee 100%);
+            
+            /* Borders & Shadows */
+            --border-light: #e2e8f0;
+            --border-medium: #cbd5e1;
+            --border-strong: #94a3b8;
+            --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-strong: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+            --shadow-glow: 0 0 20px rgba(20, 184, 166, 0.15);
+            
+            /* Professional Font System */
+            --font-primary: 'Open Sans', sans-serif;        /* Body text - super clean, corporate */
+            --font-heading: 'Poppins', sans-serif;          /* Headings, buttons - modern, geometric */
+            --font-hero: 'DM Sans', sans-serif;             /* Hero text - sharp, high-clarity */
+            --font-ui: 'Inter', sans-serif;                 /* UI elements - designed for screen */
+            
+            /* Transitions */
+            --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            
+            /* Spacing */
+            --section-padding: 100px 0;
+            --container-padding: 0 20px;
+            --border-radius: 8px;
+            --border-radius-large: 16px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--bg-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--container-padding);
+        }
+
+        /* ===== PRELOADER ===== */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-content {
+            text-align: center;
+        }
+
+        .logo-animation {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .preloader-logo {
+            height: 80px;
+            width: auto;
+            animation: logoGlow 2s ease-in-out infinite alternate;
+        }
+
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: var(--bg-light-grey);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto 20px;
+        }
+
+        .loading-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+            animation: loadingProgress 3s ease-in-out infinite;
+        }
+
+        .loading-text {
+            color: var(--text-medium);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-light);
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            padding: 8px 0;
+            height: auto;
+            min-height: 60px;
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(25px);
+            box-shadow: var(--shadow-soft);
+            padding: 4px 0;
+            min-height: 50px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: inherit;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo-image {
+            height: 120px;
+            width: auto;
+            transition: var(--transition-smooth);
+            transform-origin: center;
+        }
+
+        .navbar.scrolled .logo-image {
+            height: 80px;
+            transform: scale(0.8);
+        }
+
+        .logo-image:hover {
+            transform: scale(1.02);
+        }
+
+        .navbar.scrolled .logo-image:hover {
+            transform: scale(0.82);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            position: relative;
+            color: var(--text-cool-grey);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-smooth);
+            padding: 8px 0;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--text-soft-white);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .hamburger {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            position: relative;
+            transition: var(--transition-smooth);
+        }
+
+        .hamburger::before,
+        .hamburger::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: var(--transition-smooth);
+        }
+
+        .hamburger::before {
+            top: -8px;
+        }
+
+        .hamburger::after {
+            bottom: -8px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-family: var(--font-heading);
+            font-weight: 500;
+            font-size: 16px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: var(--primary-gradient);
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(20, 184, 166, 0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-teal);
+            border: 2px solid var(--primary-teal);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-teal);
+            color: white;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: var(--section-padding);
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--bg-white) 0%, var(--bg-light-grey) 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
+            padding: 8px 16px;
+            font-size: 14px;
+            color: var(--primary-teal);
+            margin-bottom: 24px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: 56px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: var(--text-soft-white);
+        }
+
+        .gradient-text {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-cool-grey);
+            margin-bottom: 40px;
+            max-width: 500px;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-family: var(--font-hero);
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-teal);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-cool-grey);
+            margin-top: 4px;
+        }
+
+        .hero-visual {
+            animation: slideInRight 1s ease-out;
+            text-align: center;
+        }
+
+        .hero-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-large);
+            box-shadow: var(--shadow-strong);
+        }
+
+        /* ===== SECTION HEADERS ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid var(--border-light);
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-family: var(--font-ui);
+            font-weight: 500;
+            color: var(--primary-teal);
+            margin-bottom: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: var(--text-medium);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* ===== SERVICES SECTION ===== */
+        .services {
+            padding: var(--section-padding);
+            background: var(--bg-light-grey);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--bg-off-black);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-large);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-teal);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            font-size: 32px;
+            color: var(--primary-teal);
+            transition: var(--transition-smooth);
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary-teal);
+            color: var(--text-soft-white);
+        }
+
+        .service-card h3 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-soft-white);
+        }
+
+        .service-card p {
+            color: var(--text-cool-grey);
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .service-features li {
+            color: var(--text-cool-grey);
+            font-size: 14px;
+            padding: 6px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-teal);
+            font-weight: bold;
+        }
+
+        /* ===== QUICK LINKS SECTION ===== */
+        .quick-links {
+            padding: var(--section-padding);
+            background: var(--bg-off-black);
+        }
+
+        .quick-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .quick-link-card {
+            background: var(--bg-charcoal);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius);
+            padding: 30px 20px;
+            text-align: center;
+            transition: var(--transition-smooth);
+            cursor: pointer;
+        }
+
+        .quick-link-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-teal);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .quick-link-icon {
+            font-size: 40px;
+            color: var(--primary-teal);
+            margin-bottom: 20px;
+        }
+
+        .quick-link-card h3 {
+            font-family: var(--font-heading);
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-soft-white);
+        }
+
+        .quick-link-card p {
+            color: var(--text-cool-grey);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* ===== ABOUT SECTION ===== */
+        .about {
+            padding: var(--section-padding);
+            background: var(--bg-charcoal);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-soft-white);
+        }
+
+        .about-description {
+            font-size: 18px;
+            color: var(--text-cool-grey);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .about-stat {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-off-black);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-light);
+        }
+
+        .about-stat .stat-icon {
+            font-size: 32px;
+            color: var(--primary-teal);
+            margin-bottom: 15px;
+        }
+
+        .about-stat .stat-number {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-soft-white);
+            display: block;
+        }
+
+        .about-stat .stat-label {
+            font-size: 14px;
+            color: var(--text-cool-grey);
+        }
+
+        /* ===== CONTACT SECTION ===== */
+        .contact {
+            padding: var(--section-padding);
+            background: var(--bg-off-black);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info h2 {
+            font-family: var(--font-heading);
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-soft-white);
+        }
+
+        .contact-description {
+            font-size: 18px;
+            color: var(--text-cool-grey);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .contact-methods {
+            margin-top: 40px;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--bg-charcoal);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-light);
+            transition: var(--transition-smooth);
+        }
+
+        .contact-method:hover {
+            border-color: var(--primary-teal);
+            transform: translateX(10px);
+        }
+
+        .method-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(20, 184, 166, 0.1);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-teal);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .method-info h4 {
+            color: var(--text-soft-white);
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-family: var(--font-heading);
+        }
+
+        .method-info p {
+            color: var(--text-cool-grey);
+            font-size: 14px;
+            margin: 2px 0;
+        }
+
+        .method-info a {
+            color: var(--primary-teal);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .method-info a:hover {
+            color: var(--accent-aqua);
+        }
+
+        .contact-form-container {
+            background: var(--bg-charcoal);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-large);
+            padding: 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-header h3 {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-soft-white);
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--text-cool-grey);
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-cool-grey);
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            background: var(--bg-off-black);
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius);
+            padding: 14px 16px;
+            color: var(--text-soft-white);
+            font-family: var(--font-primary);
+            transition: var(--transition-smooth);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-teal);
+            box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-submit {
+            width: 100%;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        /* ===== FOOTER ===== */
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--bg-light-grey);
+            padding: 80px 0 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-main {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            margin-bottom: 60px;
+        }
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo-image {
+            height: 48px;
+            width: auto;
+        }
+
+        .footer-description {
+            color: var(--text-medium);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        .social-link:hover {
+            background: var(--primary-teal);
+            color: white;
+            border-color: var(--primary-teal);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .footer-column h4 {
+            color: var(--text-dark);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: var(--text-medium);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            font-size: 14px;
+        }
+
+        .footer-column a:hover {
+            color: var(--primary-teal);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid var(--border-light);
+            padding-top: 20px;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-legal p {
+            color: var(--text-medium);
+            font-size: 14px;
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .legal-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 14px;
+            transition: var(--transition-smooth);
+        }
+
+        .legal-links a:hover {
+            color: var(--primary-teal);
+        }
+
+        /* ===== FLOATING ACTION BUTTON ===== */
+        .floating-actions {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-soft-white);
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: var(--shadow-strong);
+            transition: var(--transition-smooth);
+        }
+
+        .fab-main:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes logoGlow {
+            0% { filter: drop-shadow(0 0 5px rgba(20, 184, 166, 0.5)); }
+            100% { filter: drop-shadow(0 0 20px rgba(20, 184, 166, 0.8)); }
+        }
+
+        @keyframes loadingProgress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        @keyframes slideInLeft {
+            0% { opacity: 0; transform: translateX(-50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            0% { opacity: 0; transform: translateX(50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            :root {
+                --section-padding: 80px 0;
+            }
+            
+            .hero-container,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .section-title {
+                font-size: 36px;
+            }
+            
+            .services-grid,
+            .quick-links-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+            
+            .footer-main {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(17, 24, 39, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: flex-start;
+                padding: 40px 20px;
+                transition: var(--transition-smooth);
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-toggle {
+                display: flex;
+            }
+            
+            .nav-cta {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-bottom-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .about-stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            :root {
+                --section-padding: 60px 0;
+                --container-padding: 0 15px;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .services-grid,
+            .quick-links-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* ===== NOTIFICATION STYLES ===== */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: var(--primary-teal);
+            color: var(--text-soft-white);
+            padding: 16px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-strong);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            max-width: 400px;
+            font-weight: 500;
+            animation: slideInRight 0.3s ease;
+        }
+
+        .notification.success {
+            background: #10b981;
+        }
+
+        .notification.error {
+            background: #ef4444;
+        }
+
+        .notification.info {
+            background: var(--primary-teal);
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="logo-animation">
+                <span class="logo-text">NITAI</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-fill"></div>
+            </div>
+            <p class="loading-text">Initializing Professional Solutions...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <img src="logo.png" alt="Nitai Solutions" class="logo-image">
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link active" data-section="home">Home</a>
+                <a href="#services" class="nav-link" data-section="services">Services</a>
+                <a href="#quick-links" class="nav-link" data-section="quick-links">Quick Links</a>
+                <a href="#about" class="nav-link" data-section="about">About</a>
+                <a href="#contact" class="nav-link" data-section="contact">Contact</a>
+            </div>
+            <div class="nav-cta">
+                <a href="#contact" class="btn btn-outline">Get Started</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="hamburger"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span>🚀</span>
+                    <span>Professional Business Solutions</span>
+                </div>
+                <h1 class="hero-title">
+                    Transform Your Business with 
+                    <span class="gradient-text">Professional Solutions</span>
+                </h1>
+                <p class="hero-description">
+                    We provide comprehensive business solutions that drive growth, improve efficiency, 
+                    and deliver measurable results for your organization. Partner with us for success.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <span>Get Free Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#services" class="btn btn-outline">
+                        <i class="fas fa-play"></i>
+                        <span>Our Services</span>
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">Success Rate %</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="24">0</div>
+                        <div class="stat-label">24/7 Support</div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div style="width: 100%; height: 400px; background: linear-gradient(135deg, var(--primary-teal) 0%, var(--accent-aqua) 100%); border-radius: var(--border-radius-large); display: flex; align-items: center; justify-content: center; font-size: 64px; color: white;">
+                    📊
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Our Services</div>
+                <h2 class="section-title">Professional Business Services</h2>
+                <p class="section-description">
+                    We offer comprehensive business solutions tailored to meet your specific needs 
+                    and drive sustainable growth for your organization.
+                </p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Business Consulting</h3>
+                    <p>Strategic business consulting to optimize operations and drive growth through expert analysis and planning.</p>
+                    <ul class="service-features">
+                        <li>Strategic Planning</li>
+                        <li>Process Optimization</li>
+                        <li>Market Analysis</li>
+                        <li>Growth Strategies</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="showNotification('Learn more about our Business Consulting services!', 'info')">Learn More</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Human Resources</h3>
+                    <p>Complete HR solutions including recruitment, training, and performance management systems.</p>
+                    <ul class="service-features">
+                        <li>Talent Acquisition</li>
+                        <li>Employee Training</li>
+                        <li>Performance Management</li>
+                        <li>Policy Development</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="showNotification('Discover our HR solutions!', 'info')">Learn More</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>Technology Solutions</h3>
+                    <p>Cutting-edge technology implementation and digital transformation services for modern businesses.</p>
+                    <ul class="service-features">
+                        <li>Digital Transformation</li>
+                        <li>Software Development</li>
+                        <li>System Integration</li>
+                        <li>IT Consulting</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="showNotification('Explore our Technology Solutions!', 'info')">Learn More</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Financial Advisory</h3>
+                    <p>Professional financial planning, analysis, and advisory services to optimize your business finances.</p>
+                    <ul class="service-features">
+                        <li>Financial Planning</li>
+                        <li>Investment Advisory</li>
+                        <li>Risk Management</li>
+                        <li>Tax Optimization</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="showNotification('Get expert Financial Advisory!', 'info')">Learn More</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>Marketing & Branding</h3>
+                    <p>Comprehensive marketing strategies and brand development to increase visibility and market reach.</p>
+                    <ul class="service-features">
+                        <li>Brand Development</li>
+                        <li>Digital Marketing</li>
+                        <li>Content Strategy</li>
+                        <li>Social Media Management</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="showNotification('Boost your Marketing & Branding!', 'info')">Learn More</button>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Compliance & Legal</h3>
+                    <p>Comprehensive compliance management and legal advisory services to ensure regulatory adherence.</p>
+                    <ul class="service-features">
+                        <li>Regulatory Compliance</li>
+                        <li>Legal Documentation</li>
+                        <li>Risk Assessment</li>
+                        <li>Audit Support</li>
+                    </ul>
+                    <button class="btn btn-outline" onclick="showNotification('Ensure Compliance & Legal safety!', 'info')">Learn More</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section id="quick-links" class="quick-links">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">Quick Access</div>
+                <h2 class="section-title">Quick Links & Resources</h2>
+                <p class="section-description">
+                    Access important resources, tools, and information quickly with our convenient quick links section.
+                </p>
+            </div>
+            <div class="quick-links-grid">
+                <div class="quick-link-card" onclick="showNotification('Client Portal access coming soon!', 'info')">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>Client Portal</h3>
+                    <p>Access your account, documents, and project updates</p>
+                    <div class="btn btn-outline">Access Portal</div>
+                </div>
+                
+                <div class="quick-link-card" onclick="showNotification('Resource Center available soon!', 'info')">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Resource Center</h3>
+                    <p>Download guides, templates, and business resources</p>
+                    <div class="btn btn-outline">View Resources</div>
+                </div>
+                
+                <div class="quick-link-card" onclick="window.open('mailto:info@nitaisolutions.co.in', '_blank')">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email Support</h3>
+                    <p>Send us an email for quick assistance</p>
+                    <div class="btn btn-outline">Send Email</div>
+                </div>
+                
+                <div class="quick-link-card" onclick="window.open('tel:+919321628232', '_blank')">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>Speak directly with our support team</p>
+                    <div class="btn btn-outline">Call Now</div>
+                </div>
+                
+                <div class="quick-link-card" onclick="showNotification('Appointment booking system coming soon!', 'info')">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Book Appointment</h3>
+                    <p>Schedule a consultation with our experts</p>
+                    <div class="btn btn-outline">Book Now</div>
+                </div>
+                
+                <div class="quick-link-card" onclick="showNotification('Live chat feature coming soon!', 'info')">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Live Chat</h3>
+                    <p>Chat with our support team in real-time</p>
+                    <div class="btn btn-outline">Start Chat</div>
+                </div>
+                
+                <div class="quick-link-card" onclick="showNotification('Quote calculator coming soon!', 'info')">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>Get Quote</h3>
+                    <p>Calculate pricing for our services</p>
+                    <div class="btn btn-outline">Calculate</div>
+                </div>
+                
+                <div class="quick-link-card" onclick="showNotification('FAQ section coming soon!', 'info')">
+                    <div class="quick-link-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Help Center</h3>
+                    <p>Find answers to common questions</p>
+                    <div class="btn btn-outline">Get Help</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="section-badge">About Nitai Solutions</div>
+                    <h2>Delivering Excellence in Business Solutions</h2>
+                    <p class="about-description">
+                        At Nitai Solutions, we are committed to providing professional business services that drive growth and success. 
+                        Our team of experienced professionals works closely with clients to understand their unique challenges and 
+                        deliver customized solutions that exceed expectations.
+                    </p>
+                    <p class="about-description">
+                        Founded with a vision to transform businesses through innovative solutions, we have built a reputation 
+                        for excellence, reliability, and results-driven approach in the industry.
+                    </p>
+                </div>
+                <div class="about-stats">
+                    <div class="about-stat">
+                        <div class="stat-icon">🏆</div>
+                        <div class="stat-number" data-count="5">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="stat-icon">👥</div>
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Satisfied Clients</div>
+                    </div>
+                    <div class="about-stat">
+                        <div class="stat-icon">📈</div>
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">Success Rate %</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="section-badge">Get in Touch</div>
+                    <h2>Ready to Transform Your Business?</h2>
+                    <p class="contact-description">
+                        Contact us today to discuss how Nitai Solutions can help your business achieve its goals. 
+                        We're here to provide expert guidance and support every step of the way.
+                    </p>
+                    
+                    <div class="contact-methods">
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Email Us</h4>
+                                <p><a href="mailto:info@nitaisolutions.co.in">info@nitaisolutions.co.in</a></p>
+                                <p>Quick response within 24 hours</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Call Us</h4>
+                                <p><a href="tel:+919321628232">+91 9321628232</a></p>
+                                <p><a href="tel:+919373015503">+91 9373015503</a></p>
+                                <p>Mon-Fri 9AM-6PM IST</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-info">
+                                <h4>Visit Us</h4>
+                                <p>Mumbai, Maharashtra</p>
+                                <p>India</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form class="contact-form" id="contact-form">
+                        <div class="form-header">
+                            <h3>Send us a message</h3>
+                            <p>We'll get back to you within 24 hours</p>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="company">Company</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service">
+                                <option value="">Select a service</option>
+                                <option value="business-consulting">Business Consulting</option>
+                                <option value="human-resources">Human Resources</option>
+                                <option value="technology-solutions">Technology Solutions</option>
+                                <option value="financial-advisory">Financial Advisory</option>
+                                <option value="marketing-branding">Marketing & Branding</option>
+                                <option value="compliance-legal">Compliance & Legal</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Message *</label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Tell us about your business needs..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary form-submit">
+                            <span>Send Message</span>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-main">
+                    <div class="footer-brand">
+                        <div class="footer-logo">
+                            <img src="logo.png" alt="Nitai Solutions" class="footer-logo-image">
+                        </div>
+                        <p class="footer-description">
+                            Professional business solutions that drive growth, improve efficiency, and deliver measurable results for organizations of all sizes.
+                        </p>
+                        <div class="social-links">
+                            <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>Services</h4>
+                            <ul>
+                                <li><a href="#services">Business Consulting</a></li>
+                                <li><a href="#services">Human Resources</a></li>
+                                <li><a href="#services">Technology Solutions</a></li>
+                                <li><a href="#services">Financial Advisory</a></li>
+                                <li><a href="#services">Marketing & Branding</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#quick-links">Client Portal</a></li>
+                                <li><a href="#quick-links">Resource Center</a></li>
+                                <li><a href="#quick-links">Book Appointment</a></li>
+                                <li><a href="#quick-links">Get Quote</a></li>
+                                <li><a href="#quick-links">Help Center</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Company</h4>
+                            <ul>
+                                <li><a href="#about">About Us</a></li>
+                                <li><a href="#contact">Contact</a></li>
+                                <li><a href="#">Careers</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">News</a></li>
+                            </ul>
+                        </div>
+                        
+                        <div class="footer-column">
+                            <h4>Support</h4>
+                            <ul>
+                                <li><a href="mailto:info@nitaisolutions.co.in">Email Support</a></li>
+                                <li><a href="tel:+919321628232">Phone Support</a></li>
+                                <li><a href="#">Documentation</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Live Chat</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <div class="footer-bottom-content">
+                        <div class="footer-legal">
+                            <p>&copy; 2024 Nitai Solutions. All rights reserved.</p>
+                            <div class="legal-links">
+                                <a href="#">Privacy Policy</a>
+                                <a href="#">Terms of Service</a>
+                                <a href="#">Cookie Policy</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="floating-actions">
+        <button class="fab-main" id="fab-main" onclick="scrollToTop()">
+            <i class="fas fa-chevron-up"></i>
+        </button>
+    </div>
+
+    <script>
+        // ===== GLOBAL VARIABLES =====
+        let isPreloaderHidden = false;
+        let isScrolling = false;
+
+        // ===== PRELOADER =====
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                isPreloaderHidden = true;
+                
+                // Initialize animations after preloader
+                setTimeout(() => {
+                    initializeAnimations();
+                    startCounterAnimations();
+                }, 500);
+            }, 2000);
+        });
+
+        // ===== DOM CONTENT LOADED =====
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Nitai Solutions - Professional Business Solutions Loading...');
+            
+            // Initialize all components
+            initializeNavigation();
+            initializeScrollEffects();
+            initializeContactForm();
+            
+            console.log('✨ Nitai Solutions Ready! Professional business solutions at your service.');
+        });
+
+        // ===== NAVIGATION =====
+        function initializeNavigation() {
+            const navbar = document.getElementById('navbar');
+            const navToggle = document.getElementById('nav-toggle');
+            const navMenu = document.getElementById('nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Mobile menu toggle
+            navToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                navToggle.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            // Close mobile menu when clicking on a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navMenu.classList.remove('active');
+                    navToggle.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            });
+            
+            // Navbar scroll effect
+            let ticking = false;
+            
+            function updateNavbar() {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+                ticking = false;
+            }
+            
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    requestAnimationFrame(updateNavbar);
+                    ticking = true;
+                }
+            });
+            
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    if (targetSection) {
+                        const offsetTop = targetSection.offsetTop - 140;
+                        smoothScrollTo(offsetTop, 800);
+                    }
+                });
+            });
+            
+            // Active navigation highlighting
+            const sections = document.querySelectorAll('section[id]');
+            const navLinksArray = Array.from(navLinks);
+            
+            const navObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const sectionId = entry.target.getAttribute('id');
+                        const correspondingNavLink = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+                        
+                        navLinksArray.forEach(link => link.classList.remove('active'));
+                        
+                        if (correspondingNavLink) {
+                            correspondingNavLink.classList.add('active');
+                        }
+                    }
+                });
+            }, {
+                threshold: 0.3,
+                rootMargin: '-140px 0px -80px 0px'
+            });
+            
+            sections.forEach(section => navObserver.observe(section));
+        }
+
+        // ===== SCROLL EFFECTS =====
+        function initializeScrollEffects() {
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                        
+                        // Add stagger effect for grid items
+                        if (entry.target.classList.contains('service-card') || 
+                            entry.target.classList.contains('quick-link-card')) {
+                            animateGridItems(entry.target.parentElement);
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            const animateElements = document.querySelectorAll(`
+                .service-card, .quick-link-card, .contact-method, 
+                .about-stat, .contact-form-container
+            `);
+            
+            animateElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                el.style.transitionDelay = `${index * 0.1}s`;
+                
+                fadeObserver.observe(el);
+            });
+        }
+
+        // ===== CONTACT FORM =====
+        function initializeContactForm() {
+            const contactForm = document.getElementById('contact-form');
+            const formInputs = contactForm.querySelectorAll('input, select, textarea');
+            
+            // Form submission
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const formData = new FormData(this);
+                const data = {};
+                
+                // Collect form data
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+                
+                // Validation
+                if (!validateForm(data)) {
+                    return;
+                }
+                
+                // Simulate form submission
+                submitForm(this, data);
+            });
+            
+            // Input animations and validation
+            formInputs.forEach(input => {
+                // Focus effects
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                    this.style.borderColor = 'var(--primary-teal)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                    this.style.borderColor = 'var(--border-light)';
+                    
+                    // Real-time validation
+                    validateField(this);
+                });
+                
+                // Real-time validation
+                input.addEventListener('input', function() {
+                    clearFieldError(this);
+                });
+            });
+        }
+
+        // ===== UTILITY FUNCTIONS =====
+
+        // Smooth scroll function
+        function smoothScrollTo(target, duration) {
+            const start = window.pageYOffset;
+            const distance = target - start;
+            let startTime = null;
+
+            function scrollAnimation(currentTime) {
+                if (startTime === null) startTime = currentTime;
+                const timeElapsed = currentTime - startTime;
+                const run = easeInOutQuart(timeElapsed, start, distance, duration);
+                window.scrollTo(0, run);
+                if (timeElapsed < duration) requestAnimationFrame(scrollAnimation);
+            }
+
+            requestAnimationFrame(scrollAnimation);
+        }
+
+        // Easing function
+        function easeInOutQuart(t, b, c, d) {
+            t /= d/2;
+            if (t < 1) return c/2*t*t*t*t + b;
+            t -= 2;
+            return -c/2 * (t*t*t*t - 2) + b;
+        }
+
+        // Counter animations
+        function startCounterAnimations() {
+            const counters = document.querySelectorAll('.stat-number[data-count]');
+            
+            const counterObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = parseInt(counter.getAttribute('data-count'));
+                        animateCounter(counter, target);
+                        counterObserver.unobserve(counter);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            counters.forEach(counter => counterObserver.observe(counter));
+        }
+
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const startTime = Date.now();
+            
+            function updateCounter() {
+                const now = Date.now();
+                const progress = Math.min((now - startTime) / duration, 1);
+                const current = Math.floor(progress * target);
+                
+                element.textContent = current;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            
+            requestAnimationFrame(updateCounter);
+        }
+
+        // Grid animation
+        function animateGridItems(gridContainer) {
+            const items = gridContainer.children;
+            
+            Array.from(items).forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        }
+
+        // Notification system
+        function showNotification(message, type = 'info', duration = 4000) {
+            // Remove existing notifications
+            const existingNotifications = document.querySelectorAll('.notification');
+            existingNotifications.forEach(notification => notification.remove());
+            
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            const icons = {
+                success: '✅',
+                error: '❌',
+                info: 'ℹ️',
+                warning: '⚠️'
+            };
+            
+            notification.innerHTML = `
+                <span style="margin-right: 10px;">${icons[type] || 'ℹ️'}</span>
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; margin-left: 10px; cursor: pointer; font-size: 18px;">&times;</button>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, duration);
+        }
+
+        // Form validation
+        function validateForm(data) {
+            const errors = [];
+            
+            if (!data.firstName?.trim()) {
+                errors.push('First name is required');
+            }
+            
+            if (!data.lastName?.trim()) {
+                errors.push('Last name is required');
+            }
+            
+            if (!data.email?.trim()) {
+                errors.push('Email is required');
+            } else if (!isValidEmail(data.email)) {
+                errors.push('Please enter a valid email address');
+            }
+            
+            if (!data.message?.trim()) {
+                errors.push('Message is required');
+            }
+            
+            if (errors.length > 0) {
+                showNotification(errors[0], 'error');
+                return false;
+            }
+            
+            return true;
+        }
+
+        function validateField(field) {
+            const value = field.value.trim();
+            const fieldName = field.name;
+            
+            clearFieldError(field);
+            
+            switch(fieldName) {
+                case 'email':
+                    if (value && !isValidEmail(value)) {
+                        showFieldError(field, 'Please enter a valid email address');
+                    }
+                    break;
+                case 'firstName':
+                case 'lastName':
+                    if (value && value.length < 2) {
+                        showFieldError(field, 'Name must be at least 2 characters');
+                    }
+                    break;
+                case 'message':
+                    if (value && value.length < 10) {
+                        showFieldError(field, 'Message must be at least 10 characters');
+                    }
+                    break;
+            }
+        }
+
+        function showFieldError(field, message) {
+            field.style.borderColor = '#ef4444';
+            
+            let errorElement = field.parentElement.querySelector('.field-error');
+            if (!errorElement) {
+                errorElement = document.createElement('div');
+                errorElement.className = 'field-error';
+                errorElement.style.cssText = `
+                    color: #ef4444;
+                    font-size: 12px;
+                    margin-top: 5px;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                `;
+                field.parentElement.appendChild(errorElement);
+            }
+            
+            errorElement.textContent = message;
+            errorElement.style.opacity = '1';
+        }
+
+        function clearFieldError(field) {
+            field.style.borderColor = 'var(--border-light)';
+            
+            const errorElement = field.parentElement.querySelector('.field-error');
+            if (errorElement) {
+                errorElement.style.opacity = '0';
+                setTimeout(() => errorElement.remove(), 300);
+            }
+        }
+
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Form submission
+        function submitForm(form, data) {
+            const submitButton = form.querySelector('.form-submit');
+            const originalText = submitButton.innerHTML;
+            
+            // Loading state
+            submitButton.innerHTML = `
+                <div style="width: 16px; height: 16px; border: 2px solid rgba(255, 255, 255, 0.3); border-top: 2px solid white; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px;"></div>
+                <span>Sending...</span>
+            `;
+            submitButton.disabled = true;
+            
+            // Add loading spinner styles
+            if (!document.querySelector('#loading-spinner-styles')) {
+                const spinnerStyles = document.createElement('style');
+                spinnerStyles.id = 'loading-spinner-styles';
+                spinnerStyles.textContent = `
+                    @keyframes spin {
+                        0% { transform: rotate(0deg); }
+                        100% { transform: rotate(360deg); }
+                    }
+                `;
+                document.head.appendChild(spinnerStyles);
+            }
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Success
+                showNotification('🎉 Message sent successfully! We\'ll get back to you soon.', 'success');
+                
+                // Reset form
+                form.reset();
+                
+                // Reset button
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+                
+                // Analytics (placeholder)
+                console.log('Form submitted:', data);
+                
+            }, 2000);
+        }
+
+        // Scroll to top function
+        function scrollToTop() {
+            smoothScrollTo(0, 800);
+        }
+
+        // Initialize animations
+        function initializeAnimations() {
+            // Add fade-in animations to elements
+            const elements = document.querySelectorAll('.hero-content, .hero-visual');
+            elements.forEach(element => {
+                element.style.opacity = '1';
+                element.style.transform = 'translateX(0)';
+            });
+        }
+
+        // Performance monitoring
+        function monitorPerformance() {
+            if ('performance' in window) {
+                window.addEventListener('load', function() {
+                    setTimeout(() => {
+                        const perfData = performance.getEntriesByType('navigation')[0];
+                        console.log('⚡ Performance Metrics:');
+                        console.log(`  DOM Content Loaded: ${perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart}ms`);
+                        console.log(`  Load Complete: ${perfData.loadEventEnd - perfData.loadEventStart}ms`);
+                        console.log(`  Total Load Time: ${perfData.loadEventEnd - perfData.navigationStart}ms`);
+                    }, 1000);
+                });
+            }
+        }
+
+        // Initialize performance monitoring
+        monitorPerformance();
+
+        // Error handling
+        window.addEventListener('error', function(e) {
+            console.error('🔥 JavaScript Error:', e.error);
+            showNotification('Something went wrong. Please refresh the page.', 'error');
+        });
+
+        console.log('🚀 Nitai Solutions JavaScript initialized successfully!');
+    </script>
+</body>
+</html>
